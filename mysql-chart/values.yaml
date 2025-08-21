@@ -1,0 +1,9 @@
+mysql:
+  image: mysql:8.0
+  rootPassword: root123      # new root password
+  database: employee         # <-- database name changed here
+  user: hari              # <-- new user
+  password: dudkrish1A          # <-- new password
+  storagePath: /Users/hariduddukunta/MyWork/Softwares/MySql
+  storageSize: 5Gi
+  nodePort: 30306

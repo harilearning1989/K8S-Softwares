@@ -1,0 +1,8 @@
+oracle:
+  image: gvenzl/oracle-xe:21.3.0   # lightweight Oracle XE image
+  user: system
+  password: dudkrish1A
+  database: XEPDB1                 # default pluggable DB
+  storagePath: /Users/hariduddukunta/MyWork/Softwares/Oracle
+  storageSize: 20Gi
+  nodePort: 31521

@@ -1,0 +1,29 @@
+helm install postgres-db ./postgres-chart --namespace hari-practiced
+
+helm upgrade --install postgres-db ./postgres-chart --namespace hari-practiced
+
+kubectl get secret postgres-secret -n hari-practiced -o yaml
+
+kubectl get svc -n hari-practiced
+
+Connect PostgreSQL from DBeaver
+
+In DBeaver:
+Driver: PostgreSQL
+Host: 127.0.0.1
+Port: 30432
+Database: employee
+Username: hari
+Password: dudkrish1A
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(100),
+    salary NUMERIC(10,2),
+    hire_date DATE
+);
+
+INSERT INTO employees (name, department, salary, hire_date)
+VALUES ('Alice', 'HR', 60000, '2023-01-10'),
+       ('Bob', 'Engineering', 85000, '2022-11-05');

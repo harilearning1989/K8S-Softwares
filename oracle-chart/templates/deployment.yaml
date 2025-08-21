@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oracle
+  namespace: hari-practiced
+spec:
+  selector:
+    matchLabels:
+      app: oracle
+  template:
+    metadata:
+      labels:
+        app: oracle
+    spec:
+      containers:
+        - name: oracle
+          image: {{ .Values.oracle.image }}
+          ports:
+            - containerPort: 1521
+          env:
+            - name: ORACLE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: oracle-secret
+                  key: ORACLE_PASSWORD
+          volumeMounts:
+            - mountPath: /opt/oracle/oradata
+              name: oracle-storage
+      volumes:
+        - name: oracle-storage
+          persistentVolumeClaim:
+            claimName: oracle-pvc

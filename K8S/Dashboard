@@ -1,0 +1,15 @@
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+kubectl -n kubernetes-dashboard edit deployment kubernetes-dashboard
+
+Find the container spec, and under args:, add:
+        - --enable-skip-login
+        - --disable-settings-authorizer
+
+Save and exit. Kubernetes will redeploy the Dashboard pod with those flags.
+
+kubectl proxy
+
+http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+kubectl apply -f admin-role-binding.yaml

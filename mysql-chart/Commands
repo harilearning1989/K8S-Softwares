@@ -1,0 +1,18 @@
+
+kubectl create namespace hari-practiced
+brew install helm
+helm version
+
+helm install mysql-db ./mysql-chart --namespace hari-practiced
+
+helm list -n hari-practiced
+helm uninstall mysql-db -n hari-practiced
+
+kubectl get pods -n hari-practiced
+kubectl get svc -n hari-practiced
+
+kubectl get pods
+kubectl get svc
+
+mysql -h 127.0.0.1 -P 30306 -u empuser -p
+# password = dudkrish1A

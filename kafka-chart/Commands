@@ -1,0 +1,19 @@
+helm install my-kafka ./kafka-chart -n hari-practiced
+
+helm uninstall my-kafka -n hari-practiced
+helm install my-kafka ./kafka-chart -n hari-practiced
+
+kubectl get pods -n hari-practiced
+kubectl get svc -n hari-practiced
+
+Access
+Kafka Broker: localhost:31092
+Zookeeper: localhost:32181
+Kafka UI Dashboard: http://localhost:30095
+
+kubectl logs kafka-7ccb5c9cd9-6n9pn -n hari-practiced
+kubectl logs <kafka-pod-name> -n hari-practiced
+
+helm uninstall my-kafka -n hari-practiced
+kubectl delete all -n hari-practiced -l app=kafka
+kubectl delete all -n hari-practiced -l app=zookeeper

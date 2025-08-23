@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+spec:
+  replicas: {{ .Values.logstash.replicas }}
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: {{ .Values.logstash.image }}
+          volumeMounts:
+            - name: logs
+              mountPath: {{ .Values.logstash.mountPath }}
+            - name: logstash-config
+              mountPath: /usr/share/logstash/pipeline/
+      volumes:
+        - name: logs
+          hostPath:
+            path: {{ .Values.logstash.hostLogPath | quote }}
+            type: File
+        - name: logstash-config
+          configMap:
+            name: logstash-config

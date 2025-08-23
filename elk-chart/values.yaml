@@ -1,0 +1,34 @@
+elasticsearch:
+  image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+  replicas: 1
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+kibana:
+  image: docker.elastic.co/kibana/kibana:8.11.0
+  replicas: 1
+
+logstash:
+  image: docker.elastic.co/logstash/logstash:8.11.0
+  replicas: 1
+  hostLogPath: /Users/hariduddukunta/MyWork/Softwares/AppLogs/spring-boot.log
+  mountPath: /mnt/logs
+  config: |
+    input {
+      file {
+        path => "/mnt/logs/spring-boot.log"
+        start_position => "beginning"
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch:9200"]
+        index => "springboot-logs-%{+YYYY.MM.dd}"
+      }
+      stdout { codec => rubydebug }
+    }

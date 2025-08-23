@@ -1,0 +1,6 @@
+apiVersion: v2
+name: kafka
+description: Kafka + Zookeeper + Kafka-UI with persistence and NodePorts
+type: application
+version: 0.1.0
+appVersion: "3.5.0"

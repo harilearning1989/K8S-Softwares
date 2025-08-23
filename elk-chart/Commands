@@ -1,0 +1,15 @@
+helm install elk ./elk-chart -n hari-practiced
+
+Elasticsearch → http://localhost:9200
+
+Kibana → http://localhost:5601
+
+Kibana → http://localhost:30001
+
+http://127.0.0.1:30001
+
+
+Elasticsearch → http://localhost:30002
+
+helm upgrade elk ./elk-chart -n hari-practiced
+kubectl logs -n hari-practiced deployment/elasticsearch

@@ -1,0 +1,3 @@
+helm install snowflake-app ./snowflake-chart
+helm upgrade snowflake-app ./snowflake-chart
+helm uninstall snowflake-app ./snowflake-chart

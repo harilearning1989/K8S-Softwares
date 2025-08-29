@@ -1,0 +1,23 @@
+replicaCount: 1
+
+namespace: hari-practiced
+
+image:
+  repository: cbellew/snowflake-prometheus-exporter
+  tag: 1.0.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 32080
+
+snowflake:
+  account: myaccount.snowflakecomputing.com
+  warehouse: COMPUTE_WH
+  database: MY_DB
+  schema: PUBLIC
+  role: SYSADMIN
+  username: myuser
+  password: dudkrish1A      # now part of values.yaml
+  passwordSecretName: snowflake-secret

@@ -2,12 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kafka
-  namespace: hari-practiced
 spec:
+  ports:
+    - name: external
+      port: {{ .Values.kafka.ports.external }}
+      targetPort: {{ .Values.kafka.ports.external }}
+    - name: internal
+      port: {{ .Values.kafka.ports.internal }}
+      targetPort: {{ .Values.kafka.ports.internal }}
   selector:
     app: kafka
-  ports:
-    - port: {{ .Values.kafka.brokerPort }}
-      targetPort: {{ .Values.kafka.brokerPort }}
-      nodePort: {{ .Values.kafka.nodePort }}
-  type: NodePort

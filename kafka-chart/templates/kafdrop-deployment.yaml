@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafdrop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafdrop
+  template:
+    metadata:
+      labels:
+        app: kafdrop
+    spec:
+      containers:
+        - name: kafdrop
+          image: {{ .Values.kafdrop.image }}
+          ports:
+            - containerPort: {{ .Values.kafdrop.port }}
+          env:
+            - name: KAFKA_BROKERCONNECT
+              value: "kafka:{{ .Values.kafka.ports.internal }}"
+            - name: JVM_OPTS
+              value: "-Xms32M -Xmx64M"

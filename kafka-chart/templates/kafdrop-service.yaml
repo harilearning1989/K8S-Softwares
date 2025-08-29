@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafdrop
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.kafdrop.port }}
+      targetPort: {{ .Values.kafdrop.port }}
+      nodePort: 30090
+  selector:
+    app: kafdrop

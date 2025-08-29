@@ -1,0 +1,18 @@
+zookeeper:
+  image: bitnami/zookeeper:3.8
+  clientPort: 2181
+  storageSize: 1Gi
+  storagePath: /Users/hariduddukunta/MyWork/Softwares/Kafka/zookeeper
+  nodePort: 32181
+
+kafka:
+  image: bitnami/kafka:3.5.0
+  brokerPort: 9092
+  storageSize: 2Gi
+  storagePath: /Users/hariduddukunta/MyWork/Softwares/Kafka/kafka
+  nodePort: 31092
+
+kafkaUi:
+  image: provectuslabs/kafka-ui:latest
+  port: 8080
+  nodePort: 30095

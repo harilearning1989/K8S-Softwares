@@ -1,0 +1,25 @@
+kubectl create namespace solr-demo
+helm install solr .
+kubectl get pods -n solr-demo
+kubectl get svc -n solr-demo
+kubectl port-forward svc/solr 8983:8983 -n solr-demo
+http://localhost:8983
+
+helm install solr . -n solr-demo --create-namespace
+kubectl get svc -n solr-demo
+kubectl get pods -n solr-demo
+kubectl get svc -n solr-demo
+helm upgrade solr . -n solr-demo
+http://localhost:30983
+
+helm upgrade solr .
+
+Solr has been deployed successfully.
+
+To access the Solr Admin UI open:
+
+http://localhost:{{ .Values.service.nodePort }}
+
+If running inside Kubernetes cluster use:
+
+kubectl get svc -n {{ .Release.Namespace }}

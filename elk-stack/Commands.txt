@@ -1,0 +1,15 @@
+kubectl create namespace elk-stack
+helm install elk-stack . -n elk-stack
+kubectl get pods -n elk-stack
+kubectl get svc -n elk-stack
+kubectl get nodes -o wide
+
+helm upgrade elk-stack . -n elk-stack
+
+helm upgrade --install elk-stack . -n elk-stack
+kubectl get pods -n elk-stack
+kubectl logs -n elk-stack deployment/kibana
+
+curl "http://localhost:30920/_cluster/health?pretty"
+curl -X PUT "http://localhost:30920/.kibana"
+kubectl delete pod -n elk-stack -l app=kibana

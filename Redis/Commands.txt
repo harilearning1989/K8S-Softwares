@@ -1,0 +1,6 @@
+helm install my-redis . -n redis
+helm upgrade my-redis .
+
+helm upgrade --install my-redis . -n redis
+kubectl get nodes -o wide
+kubectl get nodes -o wide

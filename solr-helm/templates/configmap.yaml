@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: solr-configset
+data:
+  solrconfig.xml: |
+    <config>
+        <luceneMatchVersion>9.0.0</luceneMatchVersion>
+    </config>
+
+  managed-schema: |
+    {
+      "add-field": {
+        "name":"id",
+        "type":"string",
+        "stored":true,
+        "indexed":true
+      }
+    }

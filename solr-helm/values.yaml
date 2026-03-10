@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: solr
+  tag: "9.5"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 8983
+  nodePort: 30983
+
+persistence:
+  size: 5Gi
+
+core:
+  name: new_core

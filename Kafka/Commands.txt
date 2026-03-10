@@ -3,6 +3,66 @@ docker-compose up -d
 docker-compose down
 http://localhost:8081
 
+mkdir -p /Users/hariduddukunta/MyWork/Softwares/KafkaData/zookeeper/data
+mkdir -p /Users/hariduddukunta/MyWork/Softwares/KafkaData/zookeeper/log
+mkdir -p /Users/hariduddukunta/MyWork/Softwares/KafkaData/kafka
+chmod -R 777 /Users/hariduddukunta/MyWork/Softwares/KafkaData
+
+============================
+creating topic
+docker exec -it kafka kafka-topics \
+  --create \
+  --topic products-platform-topic \
+  --bootstrap-server localhost:9092 \
+  --partitions 1 \
+  --replication-factor 1
+
+listing topic
+docker exec -it kafka kafka-topics \
+  --list \
+  --bootstrap-server localhost:9092
+
+produce topic
+docker exec -it kafka kafka-console-producer \
+  --topic products-platform-topic \
+  --bootstrap-server localhost:9092
+
+consume topic
+docker exec -it kafka kafka-console-consumer \
+  --topic products-platform-topic \
+  --bootstrap-server localhost:9092 \
+  --from-beginning
+
+docker exec -it kafka kafka-run-class kafka.tools.GetOffsetShell \
+  --broker-list localhost:9092 \
+  --topic products-platform-topic \
+  --time -1
+
+=============================
+
+docker exec -it kafka bash
+
+kafka-topics --create \
+  --topic products-platform-topic \
+  --bootstrap-server localhost:9092 \
+  --partitions 1 \
+  --replication-factor 1
+
+kafka-topics --list --bootstrap-server localhost:9092
+
+docker exec -it kafka-console-producer \
+  --topic products-platform-topic \
+  --bootstrap-server localhost:9092
+
+Hello Kafka
+This is message 2
+
+kafka-console-consumer \
+  --topic products-platform-topic \
+  --bootstrap-server localhost:9092 \
+  --from-beginning
+
+=========================================
 
 docker exec -it kafka1 kafka-topics \
   --create \

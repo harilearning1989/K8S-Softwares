@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solr
+  labels:
+    app: solr
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: solr
+  template:
+    metadata:
+      labels:
+        app: solr
+    spec:
+      initContainers:
+        - name: create-core
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              solr create_core -c {{ .Values.core.name }} -d /config
+          volumeMounts:
+            - name: configset
+              mountPath: /config
+            - name: solr-data
+              mountPath: /var/solr
+
+      containers:
+        - name: solr
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8983
+          volumeMounts:
+            - name: solr-data
+              mountPath: /var/solr
+            - name: configset
+              mountPath: /config
+
+      volumes:
+        - name: configset
+          configMap:
+            name: solr-configset
+
+        - name: solr-data
+          persistentVolumeClaim:
+            claimName: solr-pvc

@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: redis
+  tag: "7.2"
+  pullPolicy: IfNotPresent
+
+#service:
+#  type: ClusterIP
+#  port: 6379
+service:
+  type: NodePort
+  port: 6379
+  nodePort: 30079
+
+auth:
+  enabled: true
+  password: "redispassword"
+
+persistence:
+  enabled: true
+  size: 8Gi
+  storageClass: ""
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

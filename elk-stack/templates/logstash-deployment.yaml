@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+  namespace: elk-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:8.11.0
+
+          ports:
+            - containerPort: 5000
+
+          volumeMounts:
+            - name: logstash-config
+              mountPath: /usr/share/logstash/pipeline/logstash.conf
+              subPath: logstash.conf
+
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+
+      volumes:
+        - name: logstash-config
+          configMap:
+            name: logstash-config

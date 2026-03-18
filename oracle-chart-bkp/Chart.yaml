@@ -1,0 +1,6 @@
+apiVersion: v2
+name: oracle
+description: A Helm chart for Oracle XE with persistence
+type: application
+version: 0.1.0
+appVersion: "21c"

@@ -1,11 +1,5 @@
 helm install oracle-db ./oracle-chart -n hari-practiced
 
-helm list -n hari-practiced
-
-helm uninstall oracle-db -n hari-practiced
-
-kubectl get nodes -o wide
-
 kubectl get svc -n hari-practiced
 
 Connect from DBeaver

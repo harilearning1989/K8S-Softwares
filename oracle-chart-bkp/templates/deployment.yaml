@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.oracle.deploymentName }}
+  name: oracle
   namespace: hari-practiced
 spec:
   selector:
     matchLabels:
-      app: {{ .Values.oracle.appLabel }}
+      app: oracle
   template:
     metadata:
       labels:
-        app: {{ .Values.oracle.appLabel }}
+        app: oracle
     spec:
       containers:
-        - name: {{ .Values.oracle.name }}
+        - name: oracle
           image: {{ .Values.oracle.image }}
           ports:
             - containerPort: 1521

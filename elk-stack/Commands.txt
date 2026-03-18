@@ -13,3 +13,10 @@ kubectl logs -n elk-stack deployment/kibana
 curl "http://localhost:30920/_cluster/health?pretty"
 curl -X PUT "http://localhost:30920/.kibana"
 kubectl delete pod -n elk-stack -l app=kibana
+
+-------------------
+curl "http://localhost:30920/_cat/indices?v"
+
+curl -X PUT "http://localhost:30920/.kibana"
+curl -X PUT "http://localhost:30920/.kibana_task_manager"
+kubectl delete pod -n elk-stack -l app=kibana

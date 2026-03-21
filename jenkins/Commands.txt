@@ -1,0 +1,27 @@
+kubectl create namespace jenkins
+
+kubectl apply -f pv.yaml
+kubectl apply -f pvc.yaml
+
+helm repo add jenkins https://charts.jenkins.io
+helm repo update
+
+helm install jenkins jenkins/jenkins \
+  -n jenkins \
+  -f values.yaml
+
+kubectl get svc -n jenkins
+kubectl port-forward svc/jenkins -n jenkins 8082:8080
+
+kubectl get pods -n jenkins
+kubectl exec -n jenkins -it jenkins-0 -- cat /run/secrets/additional/chart-admin-password
+admin admin123
+
+get Password
+kubectl exec -n jenkins deploy/jenkins -c jenkins -- \
+  cat /run/secrets/additional/chart-admin-password
+
+
+    kubectl get pvc -n jenkins
+    kubectl get pv
+    kubectl exec -it -n jenkins deploy/jenkins -- ls /var/jenkins_home
